@@ -15,8 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class User implements com.example.patyernewtest.Model.IUser {
     private String email, password;
-    public AtomicInteger a = new AtomicInteger();
-    public static  int a2;
+
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -45,40 +44,23 @@ public class User implements com.example.patyernewtest.Model.IUser {
 
         mAuth = FirebaseAuth.getInstance();
         int isValidData;
-        int z;
-        boolean q;
 
-        //return !TextUtils.isEmpty(getEmail()) && getPassword().length() > 8;
+
         if (getEmail().isEmpty() && getPassword().isEmpty()){
-            a.set(2);
-            a2 = 2;
-            z = 2;
 
-            Log.d("ERROR", String.valueOf(a2));
+            isValidData = 2;
+
         }else{
-            mAuth.signInWithEmailAndPassword(getEmail(), getPassword())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                a.set(1);
-                                a2 = 1;
-                                Log.d("ERROR", String.valueOf(task.isSuccessful()));
-                                Log.d("ERROR", String.valueOf(a2));
-
-
-                            }else{
-                                a.set(-1);
-                                a2 = -1;
-                                Log.d("ERROR", String.valueOf(a2));
-                            }
-
-                        }
-                    });
+            Task<AuthResult> task =
+            mAuth.signInWithEmailAndPassword(getEmail(), getPassword());
+            if(task.isSuccessful()){
+                isValidData = 1;
+            } else {
+                isValidData = -1;
+            }
         }
-        isValidData = a2;
-        Log.d("ERROR", String.valueOf(a2));
-        Log.d("ERROR", String.valueOf(isValidData));
+
+        Log.d("ERROR", "isValidData = " + String.valueOf(isValidData));
         return isValidData;
     }
 
@@ -86,31 +68,31 @@ public class User implements com.example.patyernewtest.Model.IUser {
     public int isSignUp() {
 
         if (getEmail().isEmpty() && getPassword().isEmpty()){
-            //Toast.makeText(SignUp.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
-            a.set(2);
-            Log.d("WWW", String.valueOf(a));
+            isValidData = 2;
         }else{
+            Task<AuthResult> task =
             mAuth.createUserWithEmailAndPassword(getEmail(), getPassword())
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                a.set(1);
+
                                 ref.child("Users").child(mAuth.getCurrentUser().getUid()).child("email").setValue(getEmail());
                                 ref.child("Users").child(mAuth.getCurrentUser().getUid()).child("password").setValue(getPassword());
 
                             }else{
-                                a.set(-1);
-                                //Toast.makeText(SignUp.this, "You have some errors", Toast.LENGTH_SHORT).show();
+
                             }
-                            Log.d("WWW", String.valueOf(a));
+
                         }
                     });
+            if(task.isSuccessful()){
+                isValidData = 1;
+            } else {
+                isValidData = -1;
+            }
         }
 
-
-        isValidData = a.get();
-        Log.d("ERROR", String.valueOf(a));
         Log.d("ERROR", "isValidData = " + String.valueOf(isValidData));
         return isValidData;
     }
