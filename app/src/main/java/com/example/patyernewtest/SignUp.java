@@ -10,11 +10,13 @@ import android.widget.Toast;
 
 import com.example.patyernewtest.Presenter.LoginPresenter;
 import com.example.patyernewtest.View.ILoginView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUp extends AppCompatActivity implements ILoginView{
     EditText editEmailSignUp;
     EditText editPasswordSignUp;
     Button buttonSingUp;
+    FirebaseAuth mAuth;
     LoginPresenter loginPresenter;
 
     @Override
@@ -25,7 +27,8 @@ public class SignUp extends AppCompatActivity implements ILoginView{
         editEmailSignUp = findViewById(R.id.editEmailSignUp);
         editPasswordSignUp = findViewById(R.id.editPasswordSignUp);
         buttonSingUp = findViewById(R.id.buttonSingUp);
-        loginPresenter = new LoginPresenter((ILoginView) this);
+        mAuth = FirebaseAuth.getInstance();
+        loginPresenter = new LoginPresenter((ILoginView) this, mAuth);
 
         buttonSingUp.setOnClickListener(new View.OnClickListener() {
             @Override

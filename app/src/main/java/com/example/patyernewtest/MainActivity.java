@@ -13,13 +13,14 @@ import com.example.patyernewtest.Presenter.ILoginPresenter;
 import com.example.patyernewtest.Presenter.LoginPresenter;
 import com.example.patyernewtest.R;
 import com.example.patyernewtest.View.ILoginView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements ILoginView {
     EditText editEmail;
     EditText editPassword;
     Button buttonLogin;
     Button buttonSingUpActivity;
-
+    FirebaseAuth mAuth;
     ILoginPresenter loginPresenter;
 
     @Override
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
         buttonLogin = findViewById(R.id.buttonLogin);
         buttonSingUpActivity = findViewById(R.id.buttonSingUpActivity);
 
-        loginPresenter = new LoginPresenter(this);
+        mAuth = FirebaseAuth.getInstance();
+        loginPresenter = new LoginPresenter(this, mAuth);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
