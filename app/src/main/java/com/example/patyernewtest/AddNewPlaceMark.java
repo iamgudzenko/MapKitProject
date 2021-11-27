@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.patyernewtest.Presenter.PlaceMarkPresenter;
-import com.example.patyernewtest.View.IPlaceMarkView;
+import com.example.patyernewtest.View.AddPlaceMark;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class AddNewPlaceMark extends AppCompatActivity implements IPlaceMarkView {
+public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     private FirebaseAuth mAuth;
     private DatabaseReference ref;
     double latitude;
@@ -76,8 +76,10 @@ public class AddNewPlaceMark extends AppCompatActivity implements IPlaceMarkView
     @Override
     public void writePlaceMarkDone(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(AddNewPlaceMark.this, Maps.class);
+        Intent intent = new Intent(AddNewPlaceMark.this, MapActivity.class);
         startActivity(intent);
         finish();
     }
+
+
 }

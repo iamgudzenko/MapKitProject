@@ -1,5 +1,8 @@
 package com.example.patyernewtest.View;
 
-public interface IPlaceMarkView {
+import com.example.patyernewtest.Model.PlaceMark;
+
+public interface AddPlaceMark {
     void writePlaceMarkDone(String message);
+
 }

@@ -13,7 +13,7 @@
             android:name=".AddNewPlaceMark"
             android:exported="true" />
         <activity
-            android:name=".Maps"
+            android:name=".MapActivity"
             android:exported="true" />
         <activity
             android:name=".SignUp"

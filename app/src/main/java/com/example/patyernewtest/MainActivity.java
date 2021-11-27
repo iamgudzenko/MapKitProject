@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.example.patyernewtest.Presenter.ILoginPresenter;
 import com.example.patyernewtest.Presenter.LoginPresenter;
-import com.example.patyernewtest.R;
 import com.example.patyernewtest.View.ILoginView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
     @Override
     public void onLoginSuccess(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this, Maps.class);
+        Intent intent = new Intent(MainActivity.this, MapActivity.class);
         startActivity(intent);
         finish();
     }
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
     @Override
     public void isCheckLogin(boolean isLogin) {
         if(isLogin){
-            Intent intent = new Intent(MainActivity.this, Maps.class);
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
             startActivity(intent);
             finish();
         }

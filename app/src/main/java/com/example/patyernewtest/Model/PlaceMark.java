@@ -34,7 +34,9 @@ public PlaceMark(String name, double latitude, double longitude, String emailUse
         this.contact = contact;
     }
 
+public PlaceMark(){
 
+}
     @Override
     public String getName() {
         return name;

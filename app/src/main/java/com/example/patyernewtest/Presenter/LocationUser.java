@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
 
-import com.example.patyernewtest.Maps;
 import com.example.patyernewtest.View.ILocationView;
 
 public class LocationUser implements ILocationUser{
