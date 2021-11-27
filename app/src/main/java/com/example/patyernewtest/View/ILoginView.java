@@ -1,5 +1,7 @@
 package com.example.patyernewtest.View;
 
 public interface ILoginView {
-    void onLoginResult(String message);
+    void onLoginSuccess(String message);
+    void onLoginError(String message);
+    void isCheckLogin(boolean isLogin);
 }

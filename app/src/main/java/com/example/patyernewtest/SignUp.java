@@ -39,7 +39,17 @@ public class SignUp extends AppCompatActivity implements ILoginView{
     }
 
     @Override
-    public void onLoginResult(String message) {
+    public void onLoginSuccess(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLoginError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void isCheckLogin(boolean isLogin) {
+
     }
 }

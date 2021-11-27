@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable-v24/bottom_sheet_background.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_add_new_place_mark.xml" value="0.1" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_maps.xml" value="0.11005434782608696" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.10461956521739131" />
       </map>
     </option>
   </component>

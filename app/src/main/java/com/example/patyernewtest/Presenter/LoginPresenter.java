@@ -28,16 +28,16 @@ public class LoginPresenter implements ILoginPresenter{
     public void onLogin(String email, String password) {
         User user = new User(email, password);
         if (user.getEmail().isEmpty() && user.getPassword().isEmpty()){
-            loginView.onLoginResult("You have some errors");
+            loginView.onLoginError("You have some errors");
         }else {
             mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                loginView.onLoginResult("Login success");
+                                loginView.onLoginSuccess("Login success");
                             } else {
-                                loginView.onLoginResult("Fields cannot be empty");
+                                loginView.onLoginError("Fields cannot be empty");
                             }
 
                         }
@@ -52,7 +52,7 @@ public class LoginPresenter implements ILoginPresenter{
     public void onSignUp(String email, String password) {
         User user = new User(email, password);
         if (user.getEmail().isEmpty() && user.getPassword().isEmpty()){
-            loginView.onLoginResult("You have some errors");
+            loginView.onLoginError("You have some errors");
         }else{
             Task<AuthResult> task =
                     mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
@@ -60,12 +60,12 @@ public class LoginPresenter implements ILoginPresenter{
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
-                                        loginView.onLoginResult("Login success");
+                                        loginView.onLoginSuccess("Login success");
                                         ref.child("Users").child(mAuth.getCurrentUser().getUid()).child("email").setValue(user.getEmail());
                                         ref.child("Users").child(mAuth.getCurrentUser().getUid()).child("password").setValue(user.getPassword());
 
                                     }else{
-                                        loginView.onLoginResult("Fields cannot be empty");
+                                        loginView.onLoginError("Fields cannot be empty");
                                     }
 
                                 }
@@ -73,6 +73,14 @@ public class LoginPresenter implements ILoginPresenter{
         }
 
 
+    }
+
+    @Override
+    public void checkLogin() {
+        if (mAuth.getCurrentUser() != null)
+            loginView.isCheckLogin(true);
+        else
+            loginView.isCheckLogin(false);
     }
 
 }

@@ -28,13 +28,17 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+        loginPresenter = new LoginPresenter(this, mAuth);
+        loginPresenter.checkLogin();
+
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         buttonSingUpActivity = findViewById(R.id.buttonSingUpActivity);
 
-        mAuth = FirebaseAuth.getInstance();
-        loginPresenter = new LoginPresenter(this, mAuth);
+
+
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,11 +57,26 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
         });
     }
 
+
     @Override
-    public void onLoginResult(String message) {
+    public void onLoginSuccess(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, Maps.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onLoginError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-
-
+    @Override
+    public void isCheckLogin(boolean isLogin) {
+        if(isLogin){
+            Intent intent = new Intent(MainActivity.this, Maps.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 }

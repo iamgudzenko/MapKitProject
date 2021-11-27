@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Maps">
+
+    <com.yandex.mapkit.mapview.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </com.yandex.mapkit.mapview.MapView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/myLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="100dp"
+                android:background="@drawable/roundedbutton"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/user_home">
+
+            </ImageButton>
+        </RelativeLayout>
+        <com.google.android.material.bottomappbar.BottomAppBar
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/Widget.MaterialComponents.BottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/bottomAppBar"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@android:color/white"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageButton
+                    android:id="@+id/buttonProfileUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/user"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/placeholder"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/placeholder"
+                    android:layout_width="70dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/buttonProfileUser"
+                    app:layout_constraintEnd_toStartOf="@+id/placeholder1"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/buttonProfileUser"
+                    app:layout_constraintTop_toTopOf="@+id/buttonProfileUser" />
+
+                <View
+                    android:id="@+id/placeholder1"
+                    android:layout_width="70dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/placeholder"
+                    app:layout_constraintEnd_toStartOf="@+id/placeholder2"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/placeholder"
+                    app:layout_constraintTop_toTopOf="@+id/buttonProfileUser" />
+                <View
+                    android:id="@+id/placeholder2"
+                    android:layout_width="70dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/placeholder1"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonListPlace"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/placeholder1"
+                    app:layout_constraintTop_toTopOf="@+id/buttonProfileUser" />
+
+
+                <ImageButton
+                    android:id="@+id/buttonListPlace"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/list"
+                    app:layout_constraintBottom_toBottomOf="@+id/buttonProfileUser"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/placeholder2"
+                    app:layout_constraintTop_toTopOf="@+id/buttonProfileUser" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonAddPlaceMark"
+            android:backgroundTint="@color/ha"
+            app:layout_anchor="@id/bottomAppBar"
+            app:srcCompat="@drawable/plus"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
