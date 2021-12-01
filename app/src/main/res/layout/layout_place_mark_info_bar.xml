@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottomSheetContainerInfo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_background">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Share now"
+        android:id="@+id/textPoint2"
+        android:textSize="18dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        />
+
+    <TextView
+        android:id="@+id/textNamePlacemark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Название"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/textDescriptionPlacemark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Описание"
+        android:textSize="18dp"/>
+    <TextView
+        android:id="@+id/textContactPlacemark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Контакты"
+        android:textSize="18dp"/>
+    <TextView
+        android:id="@+id/textData1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Начало"
+        android:textSize="18dp"/>
+    <TextView
+        android:id="@+id/textData2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Конец"
+        android:textSize="18dp"/>
+
+</LinearLayout>

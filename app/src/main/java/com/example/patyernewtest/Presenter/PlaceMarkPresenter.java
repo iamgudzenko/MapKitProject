@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class PlaceMarkPresenter implements IPlaceMarkPresenter{
@@ -45,8 +46,38 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()){
                     PlaceMark mark = ds.getValue(PlaceMark.class);
-                    //Log.w("ERROR", mark.name);
+                    mark.setId(ds.getKey());
+
                     updatePlaceMark.showPlaceMark(mark);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("ERROR", "Failed to read value.", error.toException());
+                updatePlaceMark.errorUpdatePlaceMark("Failed to read value." + error.toException());
+            }
+        });
+    }
+
+    @Override
+    public void showInfoPlaceMark(String id) {
+
+        DatabaseReference ref;
+        //ref = FirebaseDatabase.getInstance().getReference().child("PlaceMark");
+
+        ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("PlaceMark").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    if (ds.getKey() == id){
+                        Log.w("SUUUUKAAAA", id);
+                        PlaceMark mark = ds.getValue(PlaceMark.class);
+                        updatePlaceMark.showInfoPlaceMarkView(mark);
+                    }
 
                 }
 

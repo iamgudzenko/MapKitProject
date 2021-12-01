@@ -39,6 +39,8 @@ import com.yandex.mapkit.user_location.UserLocationObjectListener;
 import com.yandex.mapkit.user_location.UserLocationView;
 import com.yandex.runtime.image.ImageProvider;
 
+import java.util.HashMap;
+
 public class MapActivity extends AppCompatActivity implements UserLocationObjectListener, InputListener, ILocationView, UpdatePlaceMark {
     private final String MAPKIT_API_KEY = "c4e25bdd-cf32-46b8-bf87-9c547fa9b989";
     private final Point TARGET_LOCATION = new Point(59.878951, 29.860782);
@@ -51,6 +53,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     boolean isPermissionDone;
     ImageButton buttonAddPlaceMark;
     PlaceMarkPresenter placeMarkPresenter;
+    BottomSheetDialog bottomSheetDialogInfoPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,23 +194,43 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         Point pointMark = new Point(mark.getLatitude(), mark.getLongitude());
         PlacemarkMapObject viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
                 this, R.drawable.search_result));
-        viewPlacemark.setUserData(mark.getEmailUser());
+        viewPlacemark.setUserData(mark.getId());
+        //Log.d("QQQ", mark.getId());
         viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+    }
+
+    @Override
+    public void showInfoPlaceMarkView(PlaceMark mark) {
+        TextView textNamePlacemark, textDescriptionPlacemark, textContactPlacemark;
+        textNamePlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textNamePlacemark);
+        textDescriptionPlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textDescriptionPlacemark);
+        textContactPlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textContactPlacemark);
+        textNamePlacemark.setText(mark.getName());
+        textDescriptionPlacemark.setText(mark.getDescription());
+        textContactPlacemark.setText(mark.getContact());
+
+
     }
 
     @Override
     public void errorUpdatePlaceMark(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
     private MapObjectTapListener placemarkMapObjectTapListener = new MapObjectTapListener() {
         @Override
         public boolean onMapObjectTap(MapObject mapObject, Point point) {
-            Toast toast = Toast.makeText(
-                    getApplicationContext(),
-                    "Circle with id " + mapObject.getUserData(),
-                    Toast.LENGTH_SHORT);
-            toast.show();
 
+            bottomSheetDialogInfoPlace = new BottomSheetDialog(
+                    MapActivity.this, R.style.BottomSheetDialogTheme
+            );
+            View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_place_mark_info_bar, (LinearLayout)findViewById(R.id.bottomSheetContainerInfo));
+            bottomSheetDialogInfoPlace.setContentView(bottonSheetView);
+
+            placeMarkPresenter.showInfoPlaceMark(mapObject.getUserData().toString());
+            Log.d("SOBAKA", mapObject.getUserData().toString());
+
+            bottomSheetDialogInfoPlace.show();
             return true;
         }
     };

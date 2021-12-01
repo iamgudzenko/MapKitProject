@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.patyernewtest.Presenter.PlaceMarkPresenter;
 import com.example.patyernewtest.View.AddPlaceMark;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,11 +26,11 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     private DatabaseReference ref;
     double latitude;
     double longitude;
-    EditText editPlace;
-    EditText name;
-    EditText des;
-    EditText contact;
-    EditText time;
+    TextInputEditText editPlace;
+    TextInputEditText name;
+    TextInputEditText des;
+    TextInputEditText contact;
+    TextInputEditText time;
     String email;
     Button createPlace;
     PlaceMarkPresenter placeMarkPresenter;
@@ -42,6 +44,7 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
         longitude = arguments.getDouble("longitude");
 
         name = findViewById(R.id.editNameMark);
+
         editPlace = findViewById(R.id.editPlace);
         des = findViewById(R.id.editDes);
         contact = findViewById(R.id.editContact);
@@ -50,7 +53,7 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
         placeMarkPresenter = new PlaceMarkPresenter(this);
 
 
-        editPlace.setText(latitude + " " + longitude);
+        //editPlace.setText(latitude + " " + longitude);
 
         ref = FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getCurrentUser().getUid());
         ref.addValueEventListener(new ValueEventListener() {

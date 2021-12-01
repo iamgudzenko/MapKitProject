@@ -6,79 +6,114 @@
     android:layout_height="match_parent"
     tools:context=".AddNewPlaceMark">
 
-    <EditText
-        android:id="@+id/editContact"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="72dp"
-        android:ems="10"
-        android:hint="Контакты"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent" />
+    <LinearLayout
+        android:id="@+id/bottomSheetContainerInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="50dp"
+        android:orientation="vertical"
+        android:background="@drawable/bottom_sheet_background">
 
-    <EditText
-        android:id="@+id/editNameMark"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:hint="Название"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textfield.TextInputLayout
 
-    <EditText
-        android:id="@+id/editPlace"
-        android:layout_width="320dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:hint="Место"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editDes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNameMark" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="20dp"
+            android:hint="Название"
+            app:startIconDrawable = "@drawable/name_place_mark_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
-        android:id="@+id/editDes"
-        android:layout_width="314dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="44dp"
-        android:ems="10"
-        android:hint="Описание"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editContact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toStartOf="parent" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:id="@+id/editNameMark"
 
-    <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="248dp"
-        android:ems="10"
-        android:hint="Время начала"
-        android:inputType="time"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.412"
-        app:layout_constraintStart_toStartOf="parent" />
+                />
 
-    <Button
-        android:id="@+id/buttonCreatePlace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="20dp"
+            android:hint="Описание"
+            app:startIconDrawable = "@drawable/description_place_mark_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/editDes"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="20dp"
+            android:hint="Место"
+            app:startIconDrawable = "@drawable/location_place_mark_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:id="@+id/editPlace"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="20dp"
+            android:hint="Контакт"
+            app:startIconDrawable = "@drawable/contact_place_mark_icon"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:id="@+id/editContact"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="20dp"
+            android:hint="name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/buttonCreatePlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

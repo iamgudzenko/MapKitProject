@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
 
 
 
-
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

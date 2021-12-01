@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class PlaceMark implements IPlaceMark{
     private FirebaseDatabase database;
+    String id;
     String name;
     double latitude;
     double longitude;
@@ -33,10 +34,28 @@ public PlaceMark(String name, double latitude, double longitude, String emailUse
         this.description = description;
         this.contact = contact;
     }
+//    public PlaceMark(String id,String name, double latitude, double longitude, String emailUser, String description, String contact){
+//        this.id = id;
+//        this.name = name;
+//        this.latitude = latitude;
+//        this.longitude = longitude;
+//        this.emailUser = emailUser;
+//        this.description = description;
+//        this.contact = contact;
+//    }
 
 public PlaceMark(){
 
 }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String getName() {
         return name;
