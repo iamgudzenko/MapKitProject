@@ -106,6 +106,21 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_bottom_sheet, (LinearLayout)findViewById(R.id.bottomSheetContainer));
                 bottomSheetDialog.setContentView(bottonSheetView);
                 bottomSheetDialog.show();
+
+                Button buttonYes = bottomSheetDialog.findViewById(R.id.buttonYes);
+                buttonYes.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent (MapActivity.this, AddNewPlaceMark.class);
+                        intent.putExtra("isPoint", false);
+                        intent.putExtra("userLatitude", userLocationLayer.cameraPosition().getTarget().getLatitude());
+                        intent.putExtra("userLongitude", userLocationLayer.cameraPosition().getTarget().getLongitude());
+
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+
             }
         });
 
@@ -142,9 +157,11 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         buttonYes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent (MapActivity.this, AddNewPlaceMark.class);
+                intent.putExtra("isPoint", true);
                 intent.putExtra("latitude", point.getLatitude());
                 intent.putExtra("longitude", point.getLongitude());
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -228,8 +245,6 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
             bottomSheetDialogInfoPlace.setContentView(bottonSheetView);
 
             placeMarkPresenter.showInfoPlaceMark(mapObject.getUserData().toString());
-            Log.d("SOBAKA", mapObject.getUserData().toString());
-
             bottomSheetDialogInfoPlace.show();
             return true;
         }

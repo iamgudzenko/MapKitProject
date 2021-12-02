@@ -58,14 +58,17 @@
             android:layout_marginHorizontal="50dp"
             android:layout_marginVertical="20dp"
             android:hint="Место"
-            app:startIconDrawable = "@drawable/location_place_mark_icon"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <Spinner
+                android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:id="@+id/editPlace"
-                />
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@+id/selection"
+                app:startIconDrawable="@drawable/location_place_mark_icon"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,10 +99,6 @@
             android:hint="name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                />
 
 
         </com.google.android.material.textfield.TextInputLayout>

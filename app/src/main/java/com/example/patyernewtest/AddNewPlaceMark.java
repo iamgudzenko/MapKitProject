@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.patyernewtest.Presenter.PlaceMarkPresenter;
@@ -34,26 +39,61 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     String email;
     Button createPlace;
     PlaceMarkPresenter placeMarkPresenter;
+    AutoCompleteTextView mAutoCompleteTextView;
+    final String[] spinerrText = { "Выбрать", "Моё местоположение", "Выбрать точку на карте"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_place_mark);
-
         Bundle arguments = getIntent().getExtras();
-        latitude = arguments.getDouble("latitude");
-        longitude = arguments.getDouble("longitude");
+
+        if(arguments.getBoolean("isPoint")){
+            latitude = arguments.getDouble("latitude");
+            longitude = arguments.getDouble("longitude");
+            spinerrText[0] = "Точка на карте";
+
+        }
+
+        Spinner spinner = findViewById(R.id.spinner);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, spinerrText);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // Получаем выбранный объект
+                String item = (String)parent.getItemAtPosition(position);
+
+                if(item == spinerrText[1]){
+                    latitude = arguments.getDouble("userLatitude");
+                    longitude = arguments.getDouble("userLongitude");
+
+                } else if (item == spinerrText[2]){
+                    //Переход на выбор точки
+                    Intent intent = new Intent (AddNewPlaceMark.this, PointSelectionMap.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+        spinner.setOnItemSelectedListener(itemSelectedListener);
+
+
 
         name = findViewById(R.id.editNameMark);
-
-        editPlace = findViewById(R.id.editPlace);
         des = findViewById(R.id.editDes);
         contact = findViewById(R.id.editContact);
         createPlace = findViewById(R.id.buttonCreatePlace);
         mAuth = FirebaseAuth.getInstance();
         placeMarkPresenter = new PlaceMarkPresenter(this);
 
-
-        //editPlace.setText(latitude + " " + longitude);
 
         ref = FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getCurrentUser().getUid());
         ref.addValueEventListener(new ValueEventListener() {
