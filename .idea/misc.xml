@@ -4,21 +4,25 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable-v24/bottom_sheet_background.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable-v24/free-icon-envelope-3916611_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable-v24/free-icon-eye-crossed-3917126_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable-v24/premium-icon-map-marker-plus-5074176_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/contact_place_mark_icon.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/description_place_mark_icon.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/email_icon.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/free-icon-edit-3917361_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/free-icon-marker-3916880_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/free-icon-portrait-3917494_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/location_place_mark_icon.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/mark_add_point_icon.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/name_place_mark_icon.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/password_icon.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/drawable/premium-icon-beer-5070424_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_add_new_place_mark.xml" value="0.22" />
-        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_maps.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_point_selection_map.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/activity_sign_up.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.10461956521739131" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/layout_place_mark_info_bar.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/agydz/AndroidStudioProjects/PatyerNewTest/app/src/main/res/layout/test_info.xml" value="0.22" />

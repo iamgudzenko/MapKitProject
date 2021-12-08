@@ -8,7 +8,7 @@ public interface IPlaceMark {
     String getName();
     double getLatitude();
     double getLongitude();
-    DateTime getData1();
+    String getDataTime();
     String getEmailUser();
     String getDescription();
     String getContact();

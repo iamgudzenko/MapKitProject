@@ -31,13 +31,14 @@ import com.yandex.mapkit.user_location.UserLocationView;
 import com.yandex.runtime.image.ImageProvider;
 
 public class PointSelectionMap extends AppCompatActivity implements UserLocationObjectListener, CameraListener {
-    private final Point TARGET_LOCATION = new Point(59.878951, 29.860782);
+    private final Point TARGET_LOCATION = new Point(59.874541, 29.828604);
 
     private MapView mapView;
     ImageButton buttonMyLocation;
     private MapObjectCollection mapObjects;
     private UserLocationLayer userLocationLayer;
     Button buttonYesAddMark;
+    Button buttonСancel;
     Point selectedPoint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,16 @@ public class PointSelectionMap extends AppCompatActivity implements UserLocation
                 intent.putExtra("latitude", selectedPoint.getLatitude());
                 intent.putExtra("longitude", selectedPoint.getLongitude());
 
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        buttonСancel = findViewById(R.id.buttonСancel);
+        buttonСancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (PointSelectionMap.this, AddNewPlaceMark.class);
                 startActivity(intent);
                 finish();
             }

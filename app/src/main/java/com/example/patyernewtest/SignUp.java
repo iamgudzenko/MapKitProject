@@ -45,6 +45,8 @@ public class SignUp extends AppCompatActivity implements ILoginView{
 
     @Override
     public void onLoginError(String message) {
+        editEmailSignUp.setError("перепроверьте");
+        editPasswordSignUp.setError("перепроверьте");
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 

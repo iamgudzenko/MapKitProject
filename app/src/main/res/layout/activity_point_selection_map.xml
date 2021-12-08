@@ -89,7 +89,8 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Нет">
+                        android:text="Отмена"
+                        android:id="@+id/buttonСancel">
                     </Button>
                 </LinearLayout>
             </LinearLayout>

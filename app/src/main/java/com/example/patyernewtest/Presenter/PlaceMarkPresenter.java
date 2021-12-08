@@ -31,7 +31,7 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
     }
 
     @Override
-    public void writePlaceMarkToDB(String name, double latitude, double longitude, String emailUser, String description, String contact, DateTime dataTime, String timeTysa, int removeInHours) {
+    public void writePlaceMarkToDB(String name, double latitude, double longitude, String emailUser, String description, String contact, String dataTime, String timeTysa, int removeInHours) {
         PlaceMark mark = new PlaceMark(name, latitude, longitude, emailUser, description, contact, dataTime, timeTysa, removeInHours);
         DatabaseReference ref;
         ref = FirebaseDatabase.getInstance().getReference().child("PlaceMark");
@@ -49,8 +49,15 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
                 for(DataSnapshot ds : snapshot.getChildren()){
                     PlaceMark mark = ds.getValue(PlaceMark.class);
                     mark.setId(ds.getKey());
+                    Log.d("SOBAKA", mark.getDataTime());
 
-                    updatePlaceMark.showPlaceMark(mark);
+                    DateTime dataTime = new DateTime(mark.getDataTime());
+                    if(dataTime.plusHours(mark.getRemoveInHours()).isBeforeNow()){
+                        ds.getRef().setValue(null);
+                    } else {
+                        updatePlaceMark.showPlaceMark(mark);
+                    }
+
 
                 }
 

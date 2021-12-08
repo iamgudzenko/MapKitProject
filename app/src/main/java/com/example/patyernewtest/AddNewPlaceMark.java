@@ -129,7 +129,8 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
                             removeInHours =  Integer.parseInt(removeInHoursEdit.getText().toString().trim());
                             if(removeInHours <= 24 && removeInHours > 0) {
                                 DateTime dataTime = new DateTime(new Date());
-                                placeMarkPresenter.writePlaceMarkToDB(name.getText().toString(), latitude, longitude, email, des.getText().toString(), contact.getText().toString(), dataTime, timeStartTysa.getText().toString(), removeInHours);
+                                String dataString = dataTime.toString("yyyy-MM-dd") + "T" +  dataTime.toString("HH:mm");
+                                placeMarkPresenter.writePlaceMarkToDB(name.getText().toString(), latitude, longitude, email, des.getText().toString(), contact.getText().toString(), dataString, timeStartTysa.getText().toString(), removeInHours);
 
                             } else {
                                 removeInHoursEdit.setError("от 1 до 24 ч");

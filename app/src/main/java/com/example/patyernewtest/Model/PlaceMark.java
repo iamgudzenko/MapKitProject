@@ -4,7 +4,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.joda.time.DateTime;
 
-import java.util.Date;
 
 public class PlaceMark implements IPlaceMark{
     private FirebaseDatabase database;
@@ -12,14 +11,14 @@ public class PlaceMark implements IPlaceMark{
     String name;
     double latitude;
     double longitude;
-    DateTime dataTime;
+    String dataTime;
     String timeTysa;
     String emailUser;
     String description;
     String contact;
     int removeInHours;
 
-public PlaceMark(String name, double latitude, double longitude, String emailUser, String description, String contact, DateTime dataTime, String timeTysa, int removeInHours){
+public PlaceMark(String name, double latitude, double longitude, String emailUser, String description, String contact, String dataTime, String timeTysa, int removeInHours){
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -59,7 +58,7 @@ public PlaceMark(){
     }
 
     @Override
-    public DateTime getData1() {
+    public String getDataTime() {
         return dataTime;
     }
 

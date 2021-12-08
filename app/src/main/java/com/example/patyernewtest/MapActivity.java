@@ -55,6 +55,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     PlaceMarkPresenter placeMarkPresenter;
     BottomSheetDialog bottomSheetDialogInfoPlace;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
@@ -103,8 +104,9 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_bottom_sheet, (LinearLayout)findViewById(R.id.bottomSheetContainer));
                 bottomSheetDialog.setContentView(bottonSheetView);
                 bottomSheetDialog.show();
-
                 Button buttonYes = bottomSheetDialog.findViewById(R.id.buttonYes);
+                Button buttonСancelAddPlaceMark = bottomSheetDialog.findViewById(R.id.buttonСancelAddPlaceMark);
+
                 buttonYes.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent intent = new Intent (MapActivity.this, AddNewPlaceMark.class);
@@ -113,6 +115,13 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                         intent.putExtra("userLongitude", userLocationLayer.cameraPosition().getTarget().getLongitude());
 
                         startActivity(intent);
+                    }
+                });
+
+                buttonСancelAddPlaceMark.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        bottomSheetDialog.hide();
                     }
                 });
 
@@ -149,6 +158,9 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         bottomSheetDialog.show();
 
         Button buttonYes = bottomSheetDialog.findViewById(R.id.buttonYes);
+        Button buttonСancelAddPlaceMark = bottomSheetDialog.findViewById(R.id.buttonСancelAddPlaceMark);
+
+
         buttonYes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent (MapActivity.this, AddNewPlaceMark.class);
@@ -157,6 +169,12 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 intent.putExtra("longitude", point.getLongitude());
                 startActivity(intent);
 
+            }
+        });
+        buttonСancelAddPlaceMark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.hide();
             }
         });
 
@@ -202,6 +220,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
     @Override
     public void showPlaceMark(PlaceMark mark) {
+
         Point pointMark = new Point(mark.getLatitude(), mark.getLongitude());
         PlacemarkMapObject viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
                 this, R.drawable.search_result));
