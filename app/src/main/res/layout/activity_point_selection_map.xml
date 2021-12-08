@@ -23,6 +23,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="50dp"
+                    android:src="@drawable/mark_add_point_icon">
+
+                </ImageView>
+            </LinearLayout>
             <ImageButton
                 android:id="@+id/myLocation2"
                 android:layout_width="wrap_content"
@@ -36,6 +49,50 @@
                 android:src="@drawable/user_home">
 
             </ImageButton>
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/bottomSheetContainer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bottom_sheet_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="Хотите добавить сюда тусовку?"
+                        android:textSize="18dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Да"
+                        android:id="@+id/buttonYesAddMark"
+                        android:layout_marginHorizontal="70dp">
+                    </Button>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Нет">
+                    </Button>
+                </LinearLayout>
+            </LinearLayout>
         </RelativeLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

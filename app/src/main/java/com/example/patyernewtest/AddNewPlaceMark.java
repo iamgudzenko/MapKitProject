@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.patyernewtest.Presenter.PlaceMarkPresenter;
@@ -26,6 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.joda.time.DateTime;
+
+import java.util.Date;
+
 public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     private FirebaseAuth mAuth;
     private DatabaseReference ref;
@@ -35,7 +40,9 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     TextInputEditText name;
     TextInputEditText des;
     TextInputEditText contact;
-    TextInputEditText time;
+    TextInputEditText timeStartTysa;
+    TextInputEditText removeInHoursEdit;
+    TextView textError;
     String email;
     Button createPlace;
     PlaceMarkPresenter placeMarkPresenter;
@@ -86,11 +93,13 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
         spinner.setOnItemSelectedListener(itemSelectedListener);
 
 
-
         name = findViewById(R.id.editNameMark);
         des = findViewById(R.id.editDes);
         contact = findViewById(R.id.editContact);
         createPlace = findViewById(R.id.buttonCreatePlace);
+        timeStartTysa = findViewById(R.id.timeStartTysa);
+        removeInHoursEdit = findViewById(R.id.removeInHoursEdit);
+        textError = findViewById(R.id.textError);
         mAuth = FirebaseAuth.getInstance();
         placeMarkPresenter = new PlaceMarkPresenter(this);
 
@@ -110,7 +119,38 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
         createPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                placeMarkPresenter.writePlaceMarkToDB(name.getText().toString(), latitude, longitude, email, des.getText().toString(), contact.getText().toString() );
+
+                if(!name.getText().toString().isEmpty() && !des.getText().toString().isEmpty() && !contact.getText().toString().isEmpty() && !timeStartTysa.getText().toString().isEmpty() && !removeInHoursEdit.getText().toString().isEmpty()){
+
+                    if (timeStartTysa.getText().toString().matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")){
+                        int removeInHours;
+                        try
+                        {
+                            removeInHours =  Integer.parseInt(removeInHoursEdit.getText().toString().trim());
+                            if(removeInHours <= 24 && removeInHours > 0) {
+                                DateTime dataTime = new DateTime(new Date());
+                                placeMarkPresenter.writePlaceMarkToDB(name.getText().toString(), latitude, longitude, email, des.getText().toString(), contact.getText().toString(), dataTime, timeStartTysa.getText().toString(), removeInHours);
+
+                            } else {
+                                removeInHoursEdit.setError("от 1 до 24 ч");
+                            }
+
+                        }
+                        catch (NumberFormatException nfe)
+                        {
+                            removeInHoursEdit.setError("цифры от 1 до 24");
+                        }
+
+                        } else {
+
+                        timeStartTysa.setError("неккоректное время");
+
+                    }
+                } else {
+                    textError.setText("не оставляйте поля пустыми");
+                }
+
+
             }
         });
 

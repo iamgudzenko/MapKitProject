@@ -2,6 +2,8 @@ package com.example.patyernewtest.Model;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.joda.time.DateTime;
+
 import java.util.Date;
 
 public class PlaceMark implements IPlaceMark{
@@ -10,39 +12,24 @@ public class PlaceMark implements IPlaceMark{
     String name;
     double latitude;
     double longitude;
-    Date date1;
-    Date date2;
+    DateTime dataTime;
+    String timeTysa;
     String emailUser;
     String description;
     String contact;
+    int removeInHours;
 
-//    PlaceMar(String name, double latitude, double longitude, Date date1, Date date2 ,String emailUser, String description, String contacts){
-//        this.name = name;
-//        this.latitude = latitude;
-//        this.longitude = longitude;
-//        this.date1 = date1;
-//        this.date2 = date2;
-//        this.emailUser = emailUser;
-//        this.description = description;
-//        this.contacts = contacts;
-//    }
-public PlaceMark(String name, double latitude, double longitude, String emailUser, String description, String contact){
+public PlaceMark(String name, double latitude, double longitude, String emailUser, String description, String contact, DateTime dataTime, String timeTysa, int removeInHours){
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.emailUser = emailUser;
         this.description = description;
         this.contact = contact;
+        this.dataTime = dataTime;
+        this.timeTysa = timeTysa;
+        this.removeInHours = removeInHours;
     }
-//    public PlaceMark(String id,String name, double latitude, double longitude, String emailUser, String description, String contact){
-//        this.id = id;
-//        this.name = name;
-//        this.latitude = latitude;
-//        this.longitude = longitude;
-//        this.emailUser = emailUser;
-//        this.description = description;
-//        this.contact = contact;
-//    }
 
 public PlaceMark(){
 
@@ -72,13 +59,8 @@ public PlaceMark(){
     }
 
     @Override
-    public Date getDate1() {
-        return date1;
-    }
-
-    @Override
-    public Date getDate2() {
-        return date2;
+    public DateTime getData1() {
+        return dataTime;
     }
 
     @Override
@@ -95,4 +77,15 @@ public PlaceMark(){
     public String getContact() {
         return contact;
     }
+
+    @Override
+    public String getTimeTysa() {
+        return timeTysa;
+    }
+
+    @Override
+    public int getRemoveInHours() {
+        return removeInHours;
+    }
+
 }

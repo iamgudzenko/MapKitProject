@@ -14,6 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import org.joda.time.DateTime;
+
 public class PlaceMarkPresenter implements IPlaceMarkPresenter{
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference();
@@ -29,8 +31,8 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
     }
 
     @Override
-    public void writePlaceMarkToDB(String name, double latitude, double longitude, String emailUser, String description, String contact) {
-        PlaceMark mark = new PlaceMark(name, latitude, longitude, emailUser, description, contact);
+    public void writePlaceMarkToDB(String name, double latitude, double longitude, String emailUser, String description, String contact, DateTime dataTime, String timeTysa, int removeInHours) {
+        PlaceMark mark = new PlaceMark(name, latitude, longitude, emailUser, description, contact, dataTime, timeTysa, removeInHours);
         DatabaseReference ref;
         ref = FirebaseDatabase.getInstance().getReference().child("PlaceMark");
         ref.push().setValue(mark);

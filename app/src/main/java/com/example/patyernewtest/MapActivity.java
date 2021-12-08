@@ -43,7 +43,7 @@ import java.util.HashMap;
 
 public class MapActivity extends AppCompatActivity implements UserLocationObjectListener, InputListener, ILocationView, UpdatePlaceMark {
     private final String MAPKIT_API_KEY = "c4e25bdd-cf32-46b8-bf87-9c547fa9b989";
-    private final Point TARGET_LOCATION = new Point(59.878951, 29.860782);
+    private final Point TARGET_LOCATION = new Point(59.874541, 29.828604);
 
     private MapView mapView;
     private UserLocationLayer userLocationLayer;
@@ -57,16 +57,13 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(this);
-        setContentView(R.layout.activity_maps);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
         mapView = findViewById(R.id.mapview);
         mapView.getMap().setRotateGesturesEnabled(true);
         mapView.getMap().move(new CameraPosition(TARGET_LOCATION, 14, 0, 0));
-
-
 
         mapView.getMap().addInputListener(this);
 
@@ -116,8 +113,6 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                         intent.putExtra("userLongitude", userLocationLayer.cameraPosition().getTarget().getLongitude());
 
                         startActivity(intent);
-                        finish();
-
                     }
                 });
 
@@ -161,7 +156,6 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 intent.putExtra("latitude", point.getLatitude());
                 intent.putExtra("longitude", point.getLongitude());
                 startActivity(intent);
-                finish();
 
             }
         });
@@ -212,7 +206,6 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         PlacemarkMapObject viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
                 this, R.drawable.search_result));
         viewPlacemark.setUserData(mark.getId());
-        //Log.d("QQQ", mark.getId());
         viewPlacemark.addTapListener(placemarkMapObjectTapListener);
     }
 
