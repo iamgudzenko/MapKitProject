@@ -5,20 +5,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_background">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="15dp"
-        android:text="______________"
-        android:id="@+id/textPoint2"
-        android:textSize="18dp"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="10dp"
         />
-
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/fox_icon"
+        android:layout_gravity="center">
+    </ImageView>
     <TextView
         android:id="@+id/textNamePlacemark"
         android:layout_width="match_parent"
