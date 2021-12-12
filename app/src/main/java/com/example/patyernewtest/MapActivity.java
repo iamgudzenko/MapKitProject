@@ -66,6 +66,11 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     BottomSheetDialog bottomSheetDialogInfoPlace;
     ImageButton buttonProfileUser;
     ImageButton buttonListPlace;
+    Point pointZoom;
+    ImageButton plusZoom;
+    ImageButton minusZoom;
+    ImageButton updateButton;
+    float zoom;
 
     double pointBottomRightLatitude;
     double pointBottomRightLongitude;
@@ -86,6 +91,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         mapView.getMap().addInputListener(this);
 
         mapObjects = mapView.getMap().getMapObjects();
+        mapView.getMap().addCameraListener(this);
         mAuth = FirebaseAuth.getInstance();
 
         placeMarkPresenter = new PlaceMarkPresenter(this);
@@ -97,6 +103,39 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         locationUser.permissionLocation();
         buttonMyLocation = findViewById(R.id.myLocation);
         buttonListPlace = findViewById(R.id.buttonListPlace);
+        plusZoom = findViewById(R.id.plusZoom);
+        minusZoom = findViewById(R.id.minusZoom);
+        updateButton = findViewById(R.id.updateButton);
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                placeMarkPresenter.readPlaceMark();
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Тусы обновились", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        plusZoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapView.getMap().move(
+                        new CameraPosition(pointZoom, zoom + 2, 0.0f, 0.0f),
+                        new Animation(Animation.Type.SMOOTH, 1),
+                        null);
+                //Log.d("POINT", String.valueOf(pointZoom));
+            }
+        });
+        minusZoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapView.getMap().move(
+                        new CameraPosition(pointZoom, zoom - 2, 0.0f, 0.0f),
+                        new Animation(Animation.Type.SMOOTH, 1),
+                        null);
+            }
+        });
 
         buttonListPlace.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,8 +184,8 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                         intent.putExtra("isPoint", false);
                         intent.putExtra("userLatitude", userLocationLayer.cameraPosition().getTarget().getLatitude());
                         intent.putExtra("userLongitude", userLocationLayer.cameraPosition().getTarget().getLongitude());
-
                         startActivity(intent);
+                        bottomSheetDialog.hide();
                     }
                 });
 
@@ -210,7 +249,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_bottom_sheet, (LinearLayout)findViewById(R.id.bottomSheetContainer));
         bottomSheetDialog.setContentView(bottonSheetView);
         TextView textPoint = bottomSheetDialog.findViewById(R.id.textPoint);
-        textPoint.setText("point: " + point.getLatitude() + ", " + point.getLongitude());
+        //textPoint.setText("point: " + point.getLatitude() + ", " + point.getLongitude());
         bottomSheetDialog.show();
 
         Button buttonYes = bottomSheetDialog.findViewById(R.id.buttonYes);
@@ -224,6 +263,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 intent.putExtra("latitude", point.getLatitude());
                 intent.putExtra("longitude", point.getLongitude());
                 startActivity(intent);
+                bottomSheetDialog.hide();
 
             }
         });
@@ -245,7 +285,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     public void onObjectAdded(@NonNull UserLocationView userLocationView) {
         userLocationView.getArrow().setIcon(ImageProvider.fromResource(
                 this, R.drawable.user_arrow));
-        userLocationView.getAccuracyCircle().setFillColor(Color.BLUE & 0x99ffffff);
+        //userLocationView.getAccuracyCircle().setFillColor(Color.parseColor("#e6ae74"));
     }
 
     @Override
@@ -275,13 +315,14 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     }
 
     @Override
-    public void showPlaceMark(PlaceMark mark) {
+    public void showPlaceMark(PlaceMark mark, String message) {
 
         Point pointMark = new Point(mark.getLatitude(), mark.getLongitude());
         PlacemarkMapObject viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
                 this, R.drawable.star2));
         viewPlacemark.setUserData(mark.getId());
         viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+
     }
 
     @Override
@@ -299,6 +340,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         textContactPlacemark.setText("Контакт: " + mark.getContact());
         textDataTimeStart.setText("Начало в: " + mark.getTimeTysa());
         textDataTimeFinish.setText("присоединится можно до " + dataTime.plusHours(mark.getRemoveInHours()).toString("dd.MM.yyyy HH:mm"));
+
 
     }
 
@@ -331,6 +373,9 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         Point pointBottomRight = mapView.getMapWindow().screenToWorld(bottomRight);
         Point pointTopLeft = mapView.getMapWindow().screenToWorld(topLeft);
 
-        //Log.d("POINT", String.valueOf(point.getLatitude()));
+
+        pointZoom = new Point(cameraPosition.getTarget().getLatitude(), cameraPosition.getTarget().getLongitude());
+        zoom = cameraPosition.getZoom();
+//        Log.d("POINT", String.valueOf(pointZoom));
     }
 }

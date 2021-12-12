@@ -55,7 +55,7 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
                     if(dataTime.plusHours(mark.getRemoveInHours()).isBeforeNow()){
                         ds.getRef().setValue(null);
                     } else {
-                        updatePlaceMark.showPlaceMark(mark);
+                        updatePlaceMark.showPlaceMark(mark, "Тусы обновились успешно");
                     }
 
 

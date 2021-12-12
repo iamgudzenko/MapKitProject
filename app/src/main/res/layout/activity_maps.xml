@@ -22,6 +22,47 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/updateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="400dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/roundedbutton"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/update">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/minusZoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="200dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/roundedbutton"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/minus">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/plusZoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="300dp"
+                android:background="@drawable/roundedbutton"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/plus">
+
+            </ImageButton>
 
             <ImageButton
                 android:id="@+id/myLocation"
@@ -121,7 +162,8 @@
             android:id="@+id/buttonAddPlaceMark"
             android:backgroundTint="@color/ha"
             app:layout_anchor="@id/bottomAppBar"
-            android:src="@drawable/test"
+            android:src="@drawable/plus"
+
             />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

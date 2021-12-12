@@ -82,7 +82,7 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
                     //Переход на выбор точки
                     Intent intent = new Intent (AddNewPlaceMark.this, PointSelectionMap.class);
                     startActivity(intent);
-                    finish();
+                    //finish();
                 }
             }
 
@@ -160,8 +160,8 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     @Override
     public void writePlaceMarkDone(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(AddNewPlaceMark.this, MapActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(AddNewPlaceMark.this, MapActivity.class);
+        //startActivity(intent);
         finish();
     }
 
