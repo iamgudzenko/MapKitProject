@@ -5,14 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_background">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="15dp"
-        android:text="Share now"
-        android:id="@+id/textPoint"
-        android:textSize="18dp"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

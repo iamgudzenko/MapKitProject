@@ -155,7 +155,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 Log.d("ERROR", "isPermissionDone = " + isPermissionDone);
                 if(isPermissionDone){
                     mapView.getMap().move(
-                            new CameraPosition(userLocationLayer.cameraPosition().getTarget(), 15.0f, 0.0f, 0.0f),
+                            new CameraPosition(userLocationLayer.cameraPosition().getTarget(), 17.0f, 0.0f, 0.0f),
                             new Animation(Animation.Type.SMOOTH, 1),
                             null);
                 } else {
@@ -248,8 +248,6 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         );
         View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_bottom_sheet, (LinearLayout)findViewById(R.id.bottomSheetContainer));
         bottomSheetDialog.setContentView(bottonSheetView);
-        TextView textPoint = bottomSheetDialog.findViewById(R.id.textPoint);
-        //textPoint.setText("point: " + point.getLatitude() + ", " + point.getLongitude());
         bottomSheetDialog.show();
 
         Button buttonYes = bottomSheetDialog.findViewById(R.id.buttonYes);
