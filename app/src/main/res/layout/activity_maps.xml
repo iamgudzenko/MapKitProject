@@ -121,8 +121,8 @@
             android:id="@+id/buttonAddPlaceMark"
             android:backgroundTint="@color/ha"
             app:layout_anchor="@id/bottomAppBar"
-            app:srcCompat="@drawable/plus"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:src="@drawable/test"
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

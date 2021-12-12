@@ -49,9 +49,9 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
                 for(DataSnapshot ds : snapshot.getChildren()){
                     PlaceMark mark = ds.getValue(PlaceMark.class);
                     mark.setId(ds.getKey());
-                    Log.d("SOBAKA", mark.getDataTime());
 
                     DateTime dataTime = new DateTime(mark.getDataTime());
+
                     if(dataTime.plusHours(mark.getRemoveInHours()).isBeforeNow()){
                         ds.getRef().setValue(null);
                     } else {
@@ -99,4 +99,6 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
             }
         });
     }
+
+
 }

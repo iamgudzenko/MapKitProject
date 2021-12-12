@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
             public void onClick(View view) {
                 Intent intent = new Intent (MainActivity.this, SignUp.class);
                 startActivity(intent);
-                finish();
+
             }
         });
     }

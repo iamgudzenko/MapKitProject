@@ -1,6 +1,7 @@
 package com.example.patyernewtest;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,32 +22,41 @@ import com.example.patyernewtest.Presenter.PlaceMarkPresenter;
 import com.example.patyernewtest.View.ILocationView;
 import com.example.patyernewtest.View.UpdatePlaceMark;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKit;
 import com.yandex.mapkit.MapKitFactory;
+import com.yandex.mapkit.ScreenPoint;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.layers.ObjectEvent;
+import com.yandex.mapkit.map.CameraListener;
 import com.yandex.mapkit.map.CameraPosition;
+import com.yandex.mapkit.map.CameraUpdateReason;
 import com.yandex.mapkit.map.InputListener;
 import com.yandex.mapkit.map.Map;
 import com.yandex.mapkit.map.MapObject;
 import com.yandex.mapkit.map.MapObjectCollection;
 import com.yandex.mapkit.map.MapObjectTapListener;
+import com.yandex.mapkit.map.MapWindow;
 import com.yandex.mapkit.map.PlacemarkMapObject;
+import com.yandex.mapkit.map.VisibleRegion;
 import com.yandex.mapkit.mapview.MapView;
 import com.yandex.mapkit.user_location.UserLocationLayer;
 import com.yandex.mapkit.user_location.UserLocationObjectListener;
 import com.yandex.mapkit.user_location.UserLocationView;
 import com.yandex.runtime.image.ImageProvider;
 
+import org.joda.time.DateTime;
+
 import java.util.HashMap;
 
-public class MapActivity extends AppCompatActivity implements UserLocationObjectListener, InputListener, ILocationView, UpdatePlaceMark {
+public class MapActivity extends AppCompatActivity implements UserLocationObjectListener, InputListener, ILocationView, UpdatePlaceMark, CameraListener {
     private final String MAPKIT_API_KEY = "c4e25bdd-cf32-46b8-bf87-9c547fa9b989";
     private final Point TARGET_LOCATION = new Point(59.874541, 29.828604);
 
     private MapView mapView;
     private UserLocationLayer userLocationLayer;
+    private FirebaseAuth mAuth;
     private MapObjectCollection mapObjects;
     LocationUser locationUser;
     ImageButton buttonMyLocation;
@@ -54,6 +64,13 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     ImageButton buttonAddPlaceMark;
     PlaceMarkPresenter placeMarkPresenter;
     BottomSheetDialog bottomSheetDialogInfoPlace;
+    ImageButton buttonProfileUser;
+    ImageButton buttonListPlace;
+
+    double pointBottomRightLatitude;
+    double pointBottomRightLongitude;
+    double pointTopLeftLatitude;
+    double pointTopLeftLongitude;
 
 
     @Override
@@ -64,19 +81,34 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         setContentView(R.layout.activity_maps);
         mapView = findViewById(R.id.mapview);
         mapView.getMap().setRotateGesturesEnabled(true);
-        mapView.getMap().move(new CameraPosition(TARGET_LOCATION, 14, 0, 0));
+        mapView.getMap().move(new CameraPosition(TARGET_LOCATION, 17, 0, 0));
 
         mapView.getMap().addInputListener(this);
 
         mapObjects = mapView.getMap().getMapObjects();
+        mAuth = FirebaseAuth.getInstance();
 
         placeMarkPresenter = new PlaceMarkPresenter(this);
         placeMarkPresenter.readPlaceMark();
 
+        buttonProfileUser = findViewById(R.id.buttonProfileUser);
         buttonAddPlaceMark = findViewById(R.id.buttonAddPlaceMark);
         locationUser = new LocationUser(this, this, this);
         locationUser.permissionLocation();
         buttonMyLocation = findViewById(R.id.myLocation);
+        buttonListPlace = findViewById(R.id.buttonListPlace);
+
+        buttonListPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (MapActivity.this, ListPlaceMark.class);
+                intent.putExtra("pointBottomRightLatitude", pointBottomRightLatitude);
+                intent.putExtra("pointBottomRightLongitude", pointBottomRightLongitude);
+                intent.putExtra("pointTopLeftLatitude", pointTopLeftLatitude);
+                intent.putExtra("pointTopLeftLongitude", pointTopLeftLongitude);
+                startActivity(intent);
+            }
+        });
 
         buttonMyLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +159,30 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
             }
         });
+
+        buttonProfileUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                        MapActivity.this, R.style.BottomSheetDialogTheme
+                );
+                View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_profile_user_bar, (LinearLayout)findViewById(R.id.bottomSheetContainerProfile));
+                bottomSheetDialog.setContentView(bottonSheetView);
+                bottomSheetDialog.show();
+
+                Button exitProfileUser;
+                exitProfileUser = bottomSheetDialog.findViewById(R.id.buttonYes);
+                exitProfileUser.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mAuth.signOut();
+                        Intent intent = new Intent (MapActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
+
 
     }
     @Override
@@ -223,21 +279,26 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
         Point pointMark = new Point(mark.getLatitude(), mark.getLongitude());
         PlacemarkMapObject viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
-                this, R.drawable.search_result));
+                this, R.drawable.star2));
         viewPlacemark.setUserData(mark.getId());
         viewPlacemark.addTapListener(placemarkMapObjectTapListener);
     }
 
     @Override
     public void showInfoPlaceMarkView(PlaceMark mark) {
-        TextView textNamePlacemark, textDescriptionPlacemark, textContactPlacemark;
+        TextView textNamePlacemark, textDescriptionPlacemark, textContactPlacemark, textDataTimeStart, textDataTimeFinish;
         textNamePlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textNamePlacemark);
         textDescriptionPlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textDescriptionPlacemark);
         textContactPlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textContactPlacemark);
+        textDataTimeStart = bottomSheetDialogInfoPlace.findViewById(R.id.textDataTimeStart);
+        textDataTimeFinish = bottomSheetDialogInfoPlace.findViewById(R.id.textDataTimeFinish);
+        DateTime dataTime = new DateTime(mark.getDataTime());
+
         textNamePlacemark.setText(mark.getName());
         textDescriptionPlacemark.setText(mark.getDescription());
-        textContactPlacemark.setText(mark.getContact());
-
+        textContactPlacemark.setText("Контакт: " + mark.getContact());
+        textDataTimeStart.setText("Начало в: " + mark.getTimeTysa());
+        textDataTimeFinish.setText("присоединится можно до " + dataTime.plusHours(mark.getRemoveInHours()).toString("dd.MM.yyyy HH:mm"));
 
     }
 
@@ -261,4 +322,15 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
             return true;
         }
     };
+
+
+    @Override
+    public void onCameraPositionChanged(@NonNull Map map, @NonNull CameraPosition cameraPosition, @NonNull CameraUpdateReason cameraUpdateReason, boolean b) {
+        ScreenPoint bottomRight = new ScreenPoint(mapView.getRight(), mapView.getBottom());
+        ScreenPoint topLeft = new ScreenPoint(mapView.getLeft(), mapView.getTop());
+        Point pointBottomRight = mapView.getMapWindow().screenToWorld(bottomRight);
+        Point pointTopLeft = mapView.getMapWindow().screenToWorld(topLeft);
+
+        //Log.d("POINT", String.valueOf(point.getLatitude()));
+    }
 }

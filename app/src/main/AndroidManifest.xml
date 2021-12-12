@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PatyerNewTest">
         <activity
+            android:name=".ListPlaceMark"
+            android:exported="true" />
+        <activity
             android:name=".PointSelectionMap"
             android:exported="true" />
         <activity

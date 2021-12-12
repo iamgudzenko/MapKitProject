@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="15dp"
-        android:text="Share now"
+        android:text="______________"
         android:id="@+id/textPoint2"
         android:textSize="18dp"/>
     <View
@@ -25,7 +25,8 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="Название"
-        android:textSize="18dp"/>
+        android:textAlignment="center"
+        android:textSize="24dp"/>
 
     <TextView
         android:id="@+id/textDescriptionPlacemark"
@@ -42,18 +43,19 @@
         android:text="Контакты"
         android:textSize="18dp"/>
     <TextView
-        android:id="@+id/textData1"
+        android:id="@+id/textDataTimeStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="Начало"
         android:textSize="18dp"/>
     <TextView
-        android:id="@+id/textData2"
+        android:id="@+id/textDataTimeFinish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="Конец"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textAlignment="center"/>
 
 </LinearLayout>
