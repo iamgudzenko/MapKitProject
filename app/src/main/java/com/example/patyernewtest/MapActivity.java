@@ -124,7 +124,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                         new CameraPosition(pointZoom, zoom + 2, 0.0f, 0.0f),
                         new Animation(Animation.Type.SMOOTH, 1),
                         null);
-                //Log.d("POINT", String.valueOf(pointZoom));
+
             }
         });
         minusZoom.setOnClickListener(new View.OnClickListener() {
@@ -285,7 +285,6 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     public void onObjectAdded(@NonNull UserLocationView userLocationView) {
         userLocationView.getArrow().setIcon(ImageProvider.fromResource(
                 this, R.drawable.user_arrow));
-        //userLocationView.getAccuracyCircle().setFillColor(Color.parseColor("#e6ae74"));
     }
 
     @Override
@@ -373,9 +372,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         Point pointBottomRight = mapView.getMapWindow().screenToWorld(bottomRight);
         Point pointTopLeft = mapView.getMapWindow().screenToWorld(topLeft);
 
-
         pointZoom = new Point(cameraPosition.getTarget().getLatitude(), cameraPosition.getTarget().getLongitude());
         zoom = cameraPosition.getZoom();
-//        Log.d("POINT", String.valueOf(pointZoom));
     }
 }

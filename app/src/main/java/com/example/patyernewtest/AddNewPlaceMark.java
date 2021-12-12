@@ -74,15 +74,14 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
                 // Получаем выбранный объект
                 String item = (String)parent.getItemAtPosition(position);
 
-                if(item == spinerrText[1]){
+                if(item.equals(spinerrText[1])){
                     latitude = arguments.getDouble("userLatitude");
                     longitude = arguments.getDouble("userLongitude");
 
-                } else if (item == spinerrText[2]){
+                } else if (item.equals(spinerrText[2])){
                     //Переход на выбор точки
                     Intent intent = new Intent (AddNewPlaceMark.this, PointSelectionMap.class);
                     startActivity(intent);
-                    //finish();
                 }
             }
 
@@ -160,8 +159,6 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     @Override
     public void writePlaceMarkDone(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        //Intent intent = new Intent(AddNewPlaceMark.this, MapActivity.class);
-        //startActivity(intent);
         finish();
     }
 

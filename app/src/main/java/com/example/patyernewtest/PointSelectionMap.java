@@ -79,8 +79,6 @@ public class PointSelectionMap extends AppCompatActivity implements UserLocation
                 intent.putExtra("isPoint", true);
                 intent.putExtra("latitude", selectedPoint.getLatitude());
                 intent.putExtra("longitude", selectedPoint.getLongitude());
-
-                //startActivity(intent);
                 finish();
             }
         });
@@ -91,7 +89,6 @@ public class PointSelectionMap extends AppCompatActivity implements UserLocation
             public void onClick(View view) {
                 Intent intent = new Intent (PointSelectionMap.this, AddNewPlaceMark.class);
                 intent.putExtra("isPoint", false);
-                //startActivity(intent);
                 finish();
             }
         });

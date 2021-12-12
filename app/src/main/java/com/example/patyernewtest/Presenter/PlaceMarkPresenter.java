@@ -75,8 +75,6 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
     public void showInfoPlaceMark(String id) {
 
         DatabaseReference ref;
-        //ref = FirebaseDatabase.getInstance().getReference().child("PlaceMark");
-
         ref = FirebaseDatabase.getInstance().getReference();
         ref.child("PlaceMark").addValueEventListener(new ValueEventListener() {
             @Override

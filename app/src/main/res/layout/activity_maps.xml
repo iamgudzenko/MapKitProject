@@ -22,16 +22,17 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageButton
                 android:id="@+id/updateButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="400dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="400dp"
                 android:background="@drawable/roundedbutton"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/blue"
                 android:src="@drawable/update">
 
             </ImageButton>
@@ -45,7 +46,7 @@
                 android:layout_marginBottom="200dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/roundedbutton"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/white2"
                 android:src="@drawable/minus">
 
             </ImageButton>
@@ -59,7 +60,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="300dp"
                 android:background="@drawable/roundedbutton"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/white2"
                 android:src="@drawable/plus">
 
             </ImageButton>
@@ -73,7 +74,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="100dp"
                 android:background="@drawable/roundedbutton"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/blue"
                 android:src="@drawable/user_home">
 
             </ImageButton>
