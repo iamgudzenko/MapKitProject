@@ -107,6 +107,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         minusZoom = findViewById(R.id.minusZoom);
         updateButton = findViewById(R.id.updateButton);
 
+        // кнопка update для тус
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
