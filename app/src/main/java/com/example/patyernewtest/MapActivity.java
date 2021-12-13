@@ -110,6 +110,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mapObjects.clear();
                 placeMarkPresenter.readPlaceMark();
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Тусы обновились", Toast.LENGTH_SHORT);
@@ -312,14 +313,16 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     }
 
     @Override
-    public void showPlaceMark(PlaceMark mark, String message) {
-
+    public void showPlaceMark(PlaceMark mark, boolean isActual) {
         Point pointMark = new Point(mark.getLatitude(), mark.getLongitude());
         PlacemarkMapObject viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
                 this, R.drawable.star2));
-        viewPlacemark.setUserData(mark.getId());
-        viewPlacemark.addTapListener(placemarkMapObjectTapListener);
-
+        if(isActual){
+            viewPlacemark.setUserData(mark.getId());
+            viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+        } else {
+            mapObjects.remove(viewPlacemark);
+        }
     }
 
     @Override

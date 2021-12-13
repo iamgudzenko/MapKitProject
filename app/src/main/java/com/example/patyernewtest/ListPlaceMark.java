@@ -21,7 +21,7 @@ public class ListPlaceMark extends AppCompatActivity implements UpdatePlaceMark 
     }
 
     @Override
-    public void showPlaceMark(PlaceMark mark, String message) {
+    public void showPlaceMark(PlaceMark mark, boolean isActual) {
 
     }
 
