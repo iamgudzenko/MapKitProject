@@ -14,6 +14,8 @@ import com.example.patyernewtest.Presenter.LoginPresenter;
 import com.example.patyernewtest.View.ILoginView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements ILoginView {
     EditText editEmail;
     EditText editPassword;
@@ -57,9 +59,10 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
 
 
     @Override
-    public void onLoginSuccess(String message) {
+    public void onLoginSuccess(String message, String emailUser) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, MapActivity.class);
+        intent.putExtra("emailUser", emailUser);
         startActivity(intent);
         finish();
     }
@@ -72,9 +75,10 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void isCheckLogin(boolean isLogin) {
+    public void isCheckLogin(boolean isLogin, String emailUser) {
         if(isLogin){
             Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            intent.putExtra("emailUser", emailUser);
             startActivity(intent);
             finish();
         }

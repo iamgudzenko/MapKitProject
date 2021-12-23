@@ -17,8 +17,9 @@ public class PlaceMark implements IPlaceMark{
     String description;
     String contact;
     int removeInHours;
+    int numberOfJoinUsers;
 
-public PlaceMark(String name, double latitude, double longitude, String emailUser, String description, String contact, String dataTime, String timeTysa, int removeInHours){
+public PlaceMark(String name, double latitude, double longitude, String emailUser, String description, String contact, String dataTime, String timeTysa, int removeInHours, int numberOfJoinUsers){
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -28,6 +29,7 @@ public PlaceMark(String name, double latitude, double longitude, String emailUse
         this.dataTime = dataTime;
         this.timeTysa = timeTysa;
         this.removeInHours = removeInHours;
+        this.numberOfJoinUsers = numberOfJoinUsers;
     }
 
 public PlaceMark(){
@@ -87,4 +89,12 @@ public PlaceMark(){
         return removeInHours;
     }
 
+    @Override
+    public int getNumberOfJoinUsers() {
+        return numberOfJoinUsers;
+    }
+
+    public void setNumberOfJoinUsers(int numberOfJoinUsers) {
+        this.numberOfJoinUsers = numberOfJoinUsers;
+    }
 }

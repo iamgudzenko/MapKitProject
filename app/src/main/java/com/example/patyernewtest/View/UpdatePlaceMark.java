@@ -6,4 +6,5 @@ public interface UpdatePlaceMark {
     void showPlaceMark(PlaceMark mark, boolean isActual);
     void showInfoPlaceMarkView(PlaceMark mark);
     void errorUpdatePlaceMark(String message);
+    void readListUserPlaceMark(String idPlaceMark);
 }

@@ -131,7 +131,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="150dp"
+            android:layout_width="145dp"
             android:layout_height="55dp"
             android:id="@+id/removeInHoursEdit"
             android:inputType="time"

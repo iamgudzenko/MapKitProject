@@ -14,4 +14,5 @@ public interface IPlaceMark {
     String getContact();
     String getTimeTysa();
     int getRemoveInHours();
+    int getNumberOfJoinUsers();
 }

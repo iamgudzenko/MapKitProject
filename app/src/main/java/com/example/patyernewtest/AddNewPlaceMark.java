@@ -36,7 +36,6 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     private DatabaseReference ref;
     double latitude;
     double longitude;
-    TextInputEditText editPlace;
     TextInputEditText name;
     TextInputEditText des;
     TextInputEditText contact;
@@ -46,7 +45,6 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     String email;
     Button createPlace;
     PlaceMarkPresenter placeMarkPresenter;
-    AutoCompleteTextView mAutoCompleteTextView;
     final String[] spinerrText = { "Выбрать", "Моё местоположение", "Выбрать точку на карте"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +127,7 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
                             if(removeInHours <= 24 && removeInHours > 0) {
                                 DateTime dataTime = new DateTime(new Date());
                                 String dataString = dataTime.toString("yyyy-MM-dd") + "T" +  dataTime.toString("HH:mm");
-                                placeMarkPresenter.writePlaceMarkToDB(name.getText().toString(), latitude, longitude, email, des.getText().toString(), contact.getText().toString(), dataString, timeStartTysa.getText().toString(), removeInHours);
+                                placeMarkPresenter.writePlaceMarkToDB(name.getText().toString(), latitude, longitude, email, des.getText().toString(), contact.getText().toString(), dataString, timeStartTysa.getText().toString(), removeInHours, 0);
 
                             } else {
                                 removeInHoursEdit.setError("от 1 до 24 ч");
@@ -141,7 +139,7 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
                             removeInHoursEdit.setError("цифры от 1 до 24");
                         }
 
-                        } else {
+                    } else {
 
                         timeStartTysa.setError("неккоректное время");
 

@@ -48,7 +48,9 @@ import com.yandex.runtime.image.ImageProvider;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class MapActivity extends AppCompatActivity implements UserLocationObjectListener, InputListener, ILocationView, UpdatePlaceMark, CameraListener {
     private final String MAPKIT_API_KEY = "c4e25bdd-cf32-46b8-bf87-9c547fa9b989";
@@ -77,6 +79,9 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
     double pointTopLeftLatitude;
     double pointTopLeftLongitude;
 
+    HashSet<String> userPlaceMarkIdList = new HashSet<String>();
+    Bundle arguments;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +99,14 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         mapView.getMap().addCameraListener(this);
         mAuth = FirebaseAuth.getInstance();
 
+        arguments = getIntent().getExtras();
         placeMarkPresenter = new PlaceMarkPresenter(this);
+
+        placeMarkPresenter.listUserPlaceMarkId(arguments.getString("emailUser"));
+
+
         placeMarkPresenter.readPlaceMark();
+
 
         buttonProfileUser = findViewById(R.id.buttonProfileUser);
         buttonAddPlaceMark = findViewById(R.id.buttonAddPlaceMark);
@@ -315,14 +326,23 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
     @Override
     public void showPlaceMark(PlaceMark mark, boolean isActual) {
+
         Point pointMark = new Point(mark.getLatitude(), mark.getLongitude());
-        PlacemarkMapObject viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
-                this, R.drawable.star2));
+        PlacemarkMapObject viewPlacemark;
         if(isActual){
-            viewPlacemark.setUserData(mark.getId());
-            viewPlacemark.addTapListener(placemarkMapObjectTapListener);
-        } else {
-            mapObjects.remove(viewPlacemark);
+            if(userPlaceMarkIdList.contains(mark.getId())){
+                viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
+                        this, R.drawable.star2));
+                viewPlacemark.setUserData(mark.getId());
+                viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+            } else {
+                viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
+                        this, R.drawable.star));
+                viewPlacemark.setUserData(mark.getId());
+                viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+            }
+
+
         }
     }
 
@@ -342,12 +362,61 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         textDataTimeStart.setText("Начало в: " + mark.getTimeTysa());
         textDataTimeFinish.setText("присоединится можно до " + dataTime.plusHours(mark.getRemoveInHours()).toString("dd.MM.yyyy HH:mm"));
 
+        Button joinButton;
+        Button notJoinButton;
+        notJoinButton = bottomSheetDialogInfoPlace.findViewById(R.id.notJoinButton);
+        joinButton = bottomSheetDialogInfoPlace.findViewById(R.id.joinButton);
+
+        if(userPlaceMarkIdList.contains(mark.getId())){
+            notJoinButton.setVisibility(View.VISIBLE);
+            joinButton.setVisibility(View.GONE);
+        } else {
+            joinButton.setVisibility(View.VISIBLE);
+            notJoinButton.setVisibility(View.GONE);
+        }
+
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mark.setNumberOfJoinUsers(mark.getNumberOfJoinUsers() + 1);
+                placeMarkPresenter.userJoinPlaceMark(mark.getId(), mark.getNumberOfJoinUsers());
+                placeMarkPresenter.userPlaceMarkIdListAdd(mark.getId(), arguments.getString("emailUser"));
+                joinButton.setVisibility(View.GONE);
+                notJoinButton.setVisibility(View.VISIBLE);
+                userPlaceMarkIdList.add(mark.getId());
+                placeMarkPresenter.userPlaceMarkIdListAdd(mark.getId(), arguments.getString("emailUser"));
+                mapObjects.clear();
+                placeMarkPresenter.readPlaceMark();
+            }
+        });
+
+        notJoinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mark.setNumberOfJoinUsers(mark.getNumberOfJoinUsers() - 1);
+                placeMarkPresenter.userJoinPlaceMark(mark.getId(), mark.getNumberOfJoinUsers());
+                notJoinButton.setVisibility(View.GONE);
+                joinButton.setVisibility(View.VISIBLE);
+                userPlaceMarkIdList.remove(mark.getId());
+                placeMarkPresenter.userPlaceMarkIdListDelete(mark.getId(), arguments.getString("emailUser"));
+                mapObjects.clear();
+                placeMarkPresenter.readPlaceMark();
+            }
+        });
 
     }
 
     @Override
     public void errorUpdatePlaceMark(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void readListUserPlaceMark(String idPlaceMark) {
+        userPlaceMarkIdList.add(idPlaceMark);
+
     }
 
     private MapObjectTapListener placemarkMapObjectTapListener = new MapObjectTapListener() {
@@ -362,6 +431,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
             placeMarkPresenter.showInfoPlaceMark(mapObject.getUserData().toString());
             bottomSheetDialogInfoPlace.show();
+
             return true;
         }
     };

@@ -34,4 +34,9 @@ public class ListPlaceMark extends AppCompatActivity implements UpdatePlaceMark 
     public void errorUpdatePlaceMark(String message) {
 
     }
+
+    @Override
+    public void readListUserPlaceMark(String idPlaceMark) {
+
+    }
 }

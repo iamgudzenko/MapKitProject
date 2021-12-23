@@ -12,13 +12,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.security.auth.callback.Callback;
 
 public class User implements IUser{
     private String email, password;
-    public static int isValidData;
 
 
     public User(String email, String password) {
@@ -35,6 +36,5 @@ public class User implements IUser{
     public String getPassword() {
         return password;
     }
-
 
 }

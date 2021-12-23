@@ -62,7 +62,8 @@
             android:layout_height="48dp"
             android:layout_marginHorizontal="50dp"
             android:layout_marginVertical="10dp"
-            android:text="Регистрация"/>
+            android:text="Регистрация"
+            android:backgroundTint="@color/greendark"/>
 
 
     </LinearLayout>

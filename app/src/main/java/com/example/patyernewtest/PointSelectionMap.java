@@ -64,9 +64,9 @@ public class PointSelectionMap extends AppCompatActivity implements UserLocation
             @Override
             public void onClick(View view) {
                 mapView.getMap().move(
-                            new CameraPosition(userLocationLayer.cameraPosition().getTarget(), 15.0f, 0.0f, 0.0f),
-                            new Animation(Animation.Type.SMOOTH, 1),
-                            null);
+                        new CameraPosition(userLocationLayer.cameraPosition().getTarget(), 15.0f, 0.0f, 0.0f),
+                        new Animation(Animation.Type.SMOOTH, 1),
+                        null);
 
             }
         });
@@ -79,6 +79,7 @@ public class PointSelectionMap extends AppCompatActivity implements UserLocation
                 intent.putExtra("isPoint", true);
                 intent.putExtra("latitude", selectedPoint.getLatitude());
                 intent.putExtra("longitude", selectedPoint.getLongitude());
+                startActivity(intent);
                 finish();
             }
         });
@@ -89,6 +90,7 @@ public class PointSelectionMap extends AppCompatActivity implements UserLocation
             public void onClick(View view) {
                 Intent intent = new Intent (PointSelectionMap.this, AddNewPlaceMark.class);
                 intent.putExtra("isPoint", false);
+                startActivity(intent);
                 finish();
             }
         });

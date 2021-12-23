@@ -11,5 +11,6 @@
     <color name="black2">#CAAF9B</color>
     <color name="ha">#ff808b</color>
     <color name="blue">#CBEFFD</color>
-    <color name="location">#CBFDE7</color>
+    <color name="green">#CBFDE7</color>
+    <color name="greendark">#84FBC7</color>
 </resources>
