@@ -341,8 +341,6 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 viewPlacemark.setUserData(mark.getId());
                 viewPlacemark.addTapListener(placemarkMapObjectTapListener);
             }
-
-
         }
     }
 
