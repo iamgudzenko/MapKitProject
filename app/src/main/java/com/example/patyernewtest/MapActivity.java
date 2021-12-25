@@ -346,12 +346,13 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
     @Override
     public void showInfoPlaceMarkView(PlaceMark mark) {
-        TextView textNamePlacemark, textDescriptionPlacemark, textContactPlacemark, textDataTimeStart, textDataTimeFinish;
+        TextView textNamePlacemark, textDescriptionPlacemark, textContactPlacemark, textDataTimeStart, textDataTimeFinish, usersOfJoin;
         textNamePlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textNamePlacemark);
         textDescriptionPlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textDescriptionPlacemark);
         textContactPlacemark = bottomSheetDialogInfoPlace.findViewById(R.id.textContactPlacemark);
         textDataTimeStart = bottomSheetDialogInfoPlace.findViewById(R.id.textDataTimeStart);
         textDataTimeFinish = bottomSheetDialogInfoPlace.findViewById(R.id.textDataTimeFinish);
+        usersOfJoin = bottomSheetDialogInfoPlace.findViewById(R.id.usersOfJoin);
         DateTime dataTime = new DateTime(mark.getDataTime());
 
         textNamePlacemark.setText(mark.getName());
@@ -359,6 +360,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         textContactPlacemark.setText("Контакт: " + mark.getContact());
         textDataTimeStart.setText("Начало в: " + mark.getTimeTysa());
         textDataTimeFinish.setText("присоединится можно до " + dataTime.plusHours(mark.getRemoveInHours()).toString("dd.MM.yyyy HH:mm"));
+        usersOfJoin.setText("пойдут " + mark.getNumberOfJoinUsers() + " человек ");
 
         Button joinButton;
         Button notJoinButton;
@@ -386,6 +388,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 placeMarkPresenter.userPlaceMarkIdListAdd(mark.getId(), arguments.getString("emailUser"));
                 mapObjects.clear();
                 placeMarkPresenter.readPlaceMark();
+                usersOfJoin.setText("пойдут " + (mark.getNumberOfJoinUsers() + 1) + " человек ");
             }
         });
 
@@ -401,6 +404,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 placeMarkPresenter.userPlaceMarkIdListDelete(mark.getId(), arguments.getString("emailUser"));
                 mapObjects.clear();
                 placeMarkPresenter.readPlaceMark();
+                usersOfJoin.setText("пойдут " + (mark.getNumberOfJoinUsers() - 1) + " человек ");
             }
         });
 

@@ -74,5 +74,13 @@
         android:text="вы пойдете">
 
     </Button>
+    <TextView
+        android:id="@+id/usersOfJoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text=""
+        android:textSize="18dp"
+        android:textAlignment="center"/>
 
 </LinearLayout>
