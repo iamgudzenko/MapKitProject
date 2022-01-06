@@ -154,10 +154,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (MapActivity.this, ListPlaceMark.class);
-                intent.putExtra("pointBottomRightLatitude", pointBottomRightLatitude);
-                intent.putExtra("pointBottomRightLongitude", pointBottomRightLongitude);
-                intent.putExtra("pointTopLeftLatitude", pointTopLeftLatitude);
-                intent.putExtra("pointTopLeftLongitude", pointTopLeftLongitude);
+                intent.putExtra("emailUser", arguments.getString("emailUser"));
                 startActivity(intent);
             }
         });
@@ -332,12 +329,17 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         if(isActual){
             if(userPlaceMarkIdList.contains(mark.getId())){
                 viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
-                        this, R.drawable.star2));
+                        this, R.drawable.star_placemark));
+                viewPlacemark.setUserData(mark.getId());
+                viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+            } else if (mark.getEmailUser() == arguments.getString("emailUser")){
+                viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
+                        this, R.drawable.empty_placemark));
                 viewPlacemark.setUserData(mark.getId());
                 viewPlacemark.addTapListener(placemarkMapObjectTapListener);
             } else {
                 viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
-                        this, R.drawable.star));
+                        this, R.drawable.like_placemark));
                 viewPlacemark.setUserData(mark.getId());
                 viewPlacemark.addTapListener(placemarkMapObjectTapListener);
             }
