@@ -326,22 +326,25 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
         Point pointMark = new Point(mark.getLatitude(), mark.getLongitude());
         PlacemarkMapObject viewPlacemark;
+        arguments = getIntent().getExtras();
         if(isActual){
             if(userPlaceMarkIdList.contains(mark.getId())){
-                viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
-                        this, R.drawable.star_placemark));
-                viewPlacemark.setUserData(mark.getId());
-                viewPlacemark.addTapListener(placemarkMapObjectTapListener);
-            } else if (mark.getEmailUser() == arguments.getString("emailUser")){
-                viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
-                        this, R.drawable.empty_placemark));
-                viewPlacemark.setUserData(mark.getId());
-                viewPlacemark.addTapListener(placemarkMapObjectTapListener);
-            } else {
                 viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
                         this, R.drawable.like_placemark));
                 viewPlacemark.setUserData(mark.getId());
                 viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+            } else if (mark.getEmailUser().equals(arguments.getString("emailUser"))){
+                viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
+                        this, R.drawable.star_placemark));
+                viewPlacemark.setUserData(mark.getId());
+                viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+                } else {
+                viewPlacemark = mapObjects.addPlacemark(pointMark, ImageProvider.fromResource(
+                        this, R.drawable.empty_placemark));
+                viewPlacemark.setUserData(mark.getId());
+                viewPlacemark.addTapListener(placemarkMapObjectTapListener);
+                Log.d("EMAIL", mark.getEmailUser() + "}}}" + arguments.getString("emailUser"));
+
             }
         }
     }
