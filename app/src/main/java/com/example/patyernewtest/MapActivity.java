@@ -99,13 +99,13 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         mapView.getMap().addCameraListener(this);
         mAuth = FirebaseAuth.getInstance();
 
-        arguments = getIntent().getExtras();
-        placeMarkPresenter = new PlaceMarkPresenter(this);
-
-        placeMarkPresenter.listUserPlaceMarkId(arguments.getString("emailUser"));
-
-
-        placeMarkPresenter.readPlaceMark();
+//        arguments = getIntent().getExtras();
+//        placeMarkPresenter = new PlaceMarkPresenter(this);
+//
+//        placeMarkPresenter.listUserPlaceMarkId(arguments.getString("emailUser"));
+//
+//
+//        placeMarkPresenter.readPlaceMark();
 
 
         buttonProfileUser = findViewById(R.id.buttonProfileUser);
@@ -125,7 +125,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 mapObjects.clear();
                 placeMarkPresenter.readPlaceMark();
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "Тусы обновились", Toast.LENGTH_SHORT);
+                        "Мероприятия обновились", Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -156,6 +156,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 Intent intent = new Intent (MapActivity.this, ListPlaceMark.class);
                 intent.putExtra("emailUser", arguments.getString("emailUser"));
                 startActivity(intent);
+                mapObjects.clear();
             }
         });
 
@@ -188,6 +189,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                 Button buttonYes = bottomSheetDialog.findViewById(R.id.buttonYes);
                 Button buttonСancelAddPlaceMark = bottomSheetDialog.findViewById(R.id.buttonСancelAddPlaceMark);
 
+                TextView emailProfile = findViewById(R.id.emailProfile);
                 buttonYes.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Intent intent = new Intent (MapActivity.this, AddNewPlaceMark.class);
@@ -227,12 +229,22 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
                         mAuth.signOut();
                         Intent intent = new Intent (MapActivity.this, MainActivity.class);
                         startActivity(intent);
+
                     }
                 });
             }
         });
 
 
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        mapObjects.clear();
+        arguments = getIntent().getExtras();
+        placeMarkPresenter = new PlaceMarkPresenter(this);
+        placeMarkPresenter.listUserPlaceMarkId(arguments.getString("emailUser"));
+        placeMarkPresenter.readPlaceMark();
     }
     @Override
     protected void onStop() {
@@ -372,12 +384,14 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
         notJoinButton = bottomSheetDialogInfoPlace.findViewById(R.id.notJoinButton);
         joinButton = bottomSheetDialogInfoPlace.findViewById(R.id.joinButton);
 
-        if(userPlaceMarkIdList.contains(mark.getId())){
-            notJoinButton.setVisibility(View.VISIBLE);
-            joinButton.setVisibility(View.GONE);
-        } else {
-            joinButton.setVisibility(View.VISIBLE);
-            notJoinButton.setVisibility(View.GONE);
+        if(!mark.getEmailUser().equals(arguments.getString("emailUser"))){
+            if(userPlaceMarkIdList.contains(mark.getId())){
+                notJoinButton.setVisibility(View.VISIBLE);
+                joinButton.setVisibility(View.GONE);
+            } else {
+                joinButton.setVisibility(View.VISIBLE);
+                notJoinButton.setVisibility(View.GONE);
+            }
         }
 
         joinButton.setOnClickListener(new View.OnClickListener() {

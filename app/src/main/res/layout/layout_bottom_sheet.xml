@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="15dp"
-            android:text="Хотите добавить тусовку?"
+            android:text="Хотите добавить мероприятие?"
             android:textSize="18dp"/>
 
     </LinearLayout>

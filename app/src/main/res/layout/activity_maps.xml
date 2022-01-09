@@ -43,8 +43,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="200dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="200dp"
                 android:background="@drawable/roundedbutton"
                 android:backgroundTint="@color/white2"
                 android:src="@drawable/minus">

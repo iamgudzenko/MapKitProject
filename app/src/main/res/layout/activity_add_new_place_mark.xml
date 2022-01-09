@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNewPlaceMark">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <LinearLayout
         android:id="@+id/bottomSheetContainerInfo"
@@ -17,14 +21,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Добавление новой тусовки">
+            android:layout_marginVertical="20dp"
+            android:text="Добавление нового мероприятия">
         </TextView>
         <com.google.android.material.textfield.TextInputLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="20dp"
+            android:layout_marginVertical="15dp"
             android:hint="Название"
             app:startIconDrawable = "@drawable/name_place_mark_icon"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -43,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="20dp"
+            android:layout_marginVertical="15dp"
             android:hint="Описание"
             app:startIconDrawable = "@drawable/description_place_mark_icon"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -61,10 +66,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="20dp"
+            android:layout_marginVertical="15dp"
             android:hint="Место"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Место:"
+                android:layout_marginBottom="0dp">
+
+            </TextView>
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
@@ -82,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="20dp"
+            android:layout_marginVertical="15dp"
             android:hint="Контакт"
             app:startIconDrawable = "@drawable/contact_place_mark_icon"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -94,23 +106,20 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+
+
     <com.google.android.material.textfield.TextInputLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginVertical="20dp"
-        android:hint="Начало"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="15dp"
+        android:hint="Время начала мероприятия"
         app:startIconDrawable = "@drawable/name_place_mark_icon"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
             android:id="@+id/timeStartTysa"
             android:inputType="time"
@@ -124,14 +133,15 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="50dp"
-        android:layout_marginVertical="20dp"
-        android:hint="Удалить через"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="15dp"
+
+        android:hint="Через сколько часов удалить?"
         app:startIconDrawable = "@drawable/name_place_mark_icon"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="145dp"
+            android:layout_width="match_parent"
             android:layout_height="55dp"
             android:id="@+id/removeInHoursEdit"
             android:inputType="time"
@@ -139,9 +149,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
-</LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -158,6 +165,6 @@
 
 
     </LinearLayout>
-
+</ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

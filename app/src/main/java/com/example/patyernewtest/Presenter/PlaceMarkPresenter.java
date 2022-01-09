@@ -41,7 +41,7 @@ public class PlaceMarkPresenter implements IPlaceMarkPresenter{
         DatabaseReference ref;
         ref = FirebaseDatabase.getInstance().getReference().child("PlaceMark");
         ref.push().setValue(mark);
-        addMarkView.writePlaceMarkDone("Туса добавлена!");
+        addMarkView.writePlaceMarkDone("Мероприятие добавлено!");
     }
 
     @Override

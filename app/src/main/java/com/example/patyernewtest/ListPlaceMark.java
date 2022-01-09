@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.patyernewtest.Model.CustomListAdapter;
 import com.example.patyernewtest.Model.PlaceMark;
 import com.example.patyernewtest.Presenter.PlaceMarkPresenter;
 import com.example.patyernewtest.View.UpdatePlaceMark;
@@ -20,20 +24,20 @@ public class ListPlaceMark extends AppCompatActivity implements UpdatePlaceMark 
     Bundle arguments;
     ArrayList<PlaceMark> listPlaceMark = new ArrayList<PlaceMark>();
     ArrayList<String> userPlaceMarkIdList = new ArrayList<String>();
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<PlaceMark> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_place_mark);
 
-        arguments = getIntent().getExtras();
-        placeMarkPresenter = new PlaceMarkPresenter(this);
-        placeMarkPresenter.listUserPlaceMarkId(arguments.getString("emailUser"));
-
-        ListView lvMain = (ListView) findViewById(R.id.placeMarkList);
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1 , userPlaceMarkIdList);
-        lvMain.setAdapter(adapter);
+//        arguments = getIntent().getExtras();
+//        placeMarkPresenter = new PlaceMarkPresenter(this);
+//        placeMarkPresenter.listUserPlaceMarkId(arguments.getString("emailUser"));
+//        placeMarkPresenter.readPlaceMark();
+//
+//        final ListView listView = (ListView) findViewById(R.id.placeMarkList);
+//        listView.setAdapter(new CustomListAdapter(this, listPlaceMark));
 
     }
 
@@ -41,6 +45,7 @@ public class ListPlaceMark extends AppCompatActivity implements UpdatePlaceMark 
     public void showPlaceMark(PlaceMark mark, boolean isActual) {
         if (userPlaceMarkIdList.contains(mark.getId())){
             listPlaceMark.add(mark);
+            adapter.notifyDataSetChanged();
         }
     }
 

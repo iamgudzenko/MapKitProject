@@ -34,8 +34,8 @@ import java.util.Date;
 public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     private FirebaseAuth mAuth;
     private DatabaseReference ref;
-    double latitude;
-    double longitude;
+    static double latitude;
+    static double longitude;
     TextInputEditText name;
     TextInputEditText des;
     TextInputEditText contact;
@@ -45,7 +45,7 @@ public class AddNewPlaceMark extends AppCompatActivity implements AddPlaceMark {
     String email;
     Button createPlace;
     PlaceMarkPresenter placeMarkPresenter;
-    final String[] spinerrText = { "Выбрать", "Моё местоположение", "Выбрать точку на карте"};
+    static String[] spinerrText = { "Выбрать", "Моё местоположение", "Выбрать точку на карте"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
