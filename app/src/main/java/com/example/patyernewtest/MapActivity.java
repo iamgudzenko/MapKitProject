@@ -101,10 +101,7 @@ public class MapActivity extends AppCompatActivity implements UserLocationObject
 
 //        arguments = getIntent().getExtras();
 //        placeMarkPresenter = new PlaceMarkPresenter(this);
-//
 //        placeMarkPresenter.listUserPlaceMarkId(arguments.getString("emailUser"));
-//
-//
 //        placeMarkPresenter.readPlaceMark();
 
 
