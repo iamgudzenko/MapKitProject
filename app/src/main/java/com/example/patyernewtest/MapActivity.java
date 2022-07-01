@@ -53,7 +53,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class MapActivity extends AppCompatActivity implements UserLocationObjectListener, InputListener, ILocationView, UpdatePlaceMark, CameraListener {
-    private final String MAPKIT_API_KEY = "c4e25bdd-cf32-46b8-bf87-9c547fa9b989";
+    private final String MAPKIT_API_KEY = "api_key";
     private final Point TARGET_LOCATION = new Point(59.874541, 29.828604);
 
     private MapView mapView;
